@@ -30,10 +30,15 @@ public class Menu {
                     }
                     startStatPurchasesMenu(currentBudgetAccount);
                 }
-
                 break;
                 case "4":
                     currentBudgetAccount.showBalance();
+                    break;
+                case "5":
+                    FileWork.saveToFile(currentBudgetAccount);
+                    break;
+                case "6":
+                    FileWork.loadFromFile(currentBudgetAccount);
                     break;
                 case "0":
                     System.out.println("Bye!");
@@ -53,6 +58,8 @@ public class Menu {
         System.out.println("2) Add purchase");
         System.out.println("3) Show list of purchases");
         System.out.println("4) Balance");
+        System.out.println("5) Save");
+        System.out.println("6) Load");
         System.out.println("0) Exit");
     }
 
@@ -63,7 +70,6 @@ public class Menu {
         System.out.println("3) Entertainment");
         System.out.println("4) Other");
         System.out.println("5) Back");
-        System.out.println();
 
     }
 
@@ -75,7 +81,6 @@ public class Menu {
         System.out.println("4) Other");
         System.out.println("5) All");
         System.out.println("6) Back");
-        System.out.println();
 
     }
 

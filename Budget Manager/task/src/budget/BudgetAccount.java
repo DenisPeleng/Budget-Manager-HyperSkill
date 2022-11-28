@@ -1,13 +1,35 @@
 package budget;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BudgetAccount {
     private double balance;
-    private final HashMap<Integer, ArrayList<String>> categoryPurchasesMap = new HashMap<>();
-    private final HashMap<String, Double> purchasesWithPrice = new HashMap<>();
+    private HashMap<Integer, ArrayList<String>> categoryPurchasesMap = new HashMap<>();
+    private HashMap<String, Double> purchasesWithPrice = new HashMap<>();
     private final HashMap<Integer, String> categoryNames = new HashMap<>();
+    private static final DecimalFormat df = new DecimalFormat("#0.00");
+
+    public void setCategoryPurchasesMap(HashMap<Integer, ArrayList<String>> categoryPurchasesMap) {
+        this.categoryPurchasesMap = categoryPurchasesMap;
+    }
+
+    public void setPurchasesWithPrice(HashMap<String, Double> purchasesWithPrice) {
+        this.purchasesWithPrice = purchasesWithPrice;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public HashMap<Integer, ArrayList<String>> getCategoryPurchasesMap() {
+        return categoryPurchasesMap;
+    }
+
+    public HashMap<String, Double> getPurchasesWithPrice() {
+        return purchasesWithPrice;
+    }
 
     public BudgetAccount() {
         this.balance = 0.0;
@@ -29,16 +51,16 @@ public class BudgetAccount {
     }
 
     protected void showBalance() {
-        System.out.println("Balance: $" + balance);
+        System.out.println("Balance: $" + df.format(balance));
     }
 
     protected void addPurchase(int categoryNumber, String name, double price) {
 
         ArrayList<String> currentCategoryList = categoryPurchasesMap.get(categoryNumber);
-        String currentPurchase = name + " $" + price;
+        String currentPurchase = name + " $" + df.format(price);
         currentCategoryList.add(currentPurchase);
         purchasesWithPrice.put(currentPurchase, price);
-        categoryPurchasesMap.get(5).add(name + " $" + price);
+        categoryPurchasesMap.get(5).add(name + " $" + df.format(price));
         balance = balance - price;
     }
 
@@ -55,7 +77,7 @@ public class BudgetAccount {
             System.out.println(purchase);
             totalSumPurchases = totalSumPurchases + purchasesWithPrice.get(purchase);
         }
-        System.out.println("Total sum: $" + totalSumPurchases);
+        System.out.println("Total sum: $" + df.format(totalSumPurchases));
     }
 
     private String getCategoryName(int categoryNumber) {
