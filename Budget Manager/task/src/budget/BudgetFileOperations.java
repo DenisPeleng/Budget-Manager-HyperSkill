@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class FileWork {
+import static budget.BudgetAccountService.addIncome;
+
+public class BudgetFileOperations {
     private static final String filePath = "purchases.txt";
 
     public static void saveToFile(BudgetAccount budgetAccount) {
@@ -41,7 +43,7 @@ public class FileWork {
         HashMap<String, Double> purchasesPriceMap = budgetAccount.getPurchasesWithPrice();
         try (Scanner scannerFile = new Scanner(purchasesFile)) {
             double balance = Double.parseDouble(scannerFile.nextLine());
-            budgetAccount.addIncome(balance);
+            addIncome(budgetAccount, balance);
             while (scannerFile.hasNext()) {
                 String[] fullDataPurchases = scannerFile.nextLine().split("#");
                 int categoryNumber = Integer.parseInt(fullDataPurchases[0]);
